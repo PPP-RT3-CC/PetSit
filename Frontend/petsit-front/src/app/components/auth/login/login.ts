@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { Auth } from '../../../services/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +10,25 @@ import { FormsModule, NgForm } from '@angular/forms';
   styleUrl: './login.css',
 })
 export class Login {
+
+  private authService = inject(Auth);
+  private router = inject(Router);
+
+  errorMessage = '';
   onSubmit(loginForm: NgForm){
-    console.log(loginForm)
+    if (loginForm.invalid) return;
+
+    this.authService.login(loginForm.value).subscribe({
+      next: (response) => {
+        localStorage.setItem('token', response.token);
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        this.errorMessage = err.error?.message || 'Erreur de connexion';
+      },
+      complete: () => {
+        console.log('Login request completed');
+      }
+    });
   }
 }
