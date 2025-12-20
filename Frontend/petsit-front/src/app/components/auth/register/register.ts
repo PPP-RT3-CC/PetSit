@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -8,5 +8,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './register.css',
 })
 export class Register {
-
+   onSubmit(registerForm: NgForm){
+    console.log(registerForm)
+  }
 }

@@ -1,25 +1,29 @@
-<div class="container">
-<div class="row justify-content-center">
-    <div class="col-md-9 col-lg-5">
-    <div class="login-card">
+<div class="container min-vh-100 d-flex align-items-center ">
+<div class="row justify-content-center w-100 ">
+    <div class="col-md-9 col-lg-5 ">
+    <div class="login-card ">
 
-        <div class="text-center mb-4">
+        <div class="text-center mb-4 ">
         <h2 class="login-title">Welcome Back!</h2>
         <p class="text-muted">Sign in to continue to PetSit</p>
         </div>
 
-        <form>
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" >
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email address</label>
             <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" 
-                    placeholder="Enter your email" aria-describedby="emailHelp">
+                    placeholder="Enter your email" aria-describedby="emailHelp"
+                    ngModel
+                    name="email">
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
         </div>
 
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Password</label>
             <input type="password" class="form-control form-control-lg" id="exampleInputPassword1"
-                    placeholder="Enter your password">
+                    placeholder="Enter your password"
+                    ngModel
+                    name="password">
         </div>
 
         <div class="mb-3 d-flex justify-content-between align-items-center">
@@ -46,7 +50,7 @@
 </div>
 </div>
 
-<!-- Decorative paw prints -->
 <div class="paw-decoration paw-1">🐾</div>
 <div class="paw-decoration paw-2">🐾</div>
 <div class="paw-decoration paw-3">🐾</div>
+
