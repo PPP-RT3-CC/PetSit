@@ -17,7 +17,13 @@
                      placeholder="Enter your first name"
                      ngModel
                      name="firstName"
-                     required>
+                     required
+                     minlength="3"
+                     #name="ngModel"
+                     name>
+            @if (name.invalid && name.touched) {
+                <small class="text-danger">Prénom invalide (min 3 caractères)</small>
+            }
             </div>
 
             <div class="col-md-6 mb-3">
@@ -26,7 +32,13 @@
                      placeholder="Enter your last name"
                      ngModel
                      name="lastName"
-                     required>
+                     required
+                     minlength="3"
+                     #name="ngModel"
+                     name>
+            @if (name.invalid && name.touched) {
+                <small class="text-danger">Nom invalide (min 3 caractères)</small>  
+            }
             </div>
           </div>
 
@@ -37,8 +49,13 @@
                    ngModel
                    name="email"
                    required
-                   email>
+                   email
+                   #email="ngModel"
+                   >
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            @if (email.invalid && email.touched) {
+                <small class="text-danger">Email invalide</small>
+            }
           </div>
 
           <div class="mb-3">
@@ -48,7 +65,12 @@
                    ngModel
                    name="password"
                    required
-                   minlength="6">
+                   minlength="6"
+                   #password="ngModel"
+                   password>
+            @if (password.invalid && password.touched) {
+                <small class="text-danger">Mot de passe requis (min 6 caractères)</small>
+            }
           </div>
 
           <div class="mb-3">
@@ -57,7 +79,13 @@
                    placeholder="Confirm your password"
                    ngModel
                    name="confirmPassword"
-                   required>
+                   required
+                   minlength="6"
+                   #confirmPassword="ngModel"
+                   password>
+            @if (confirmPassword.invalid && confirmPassword.touched) {
+                <small class="text-danger">Les mots de passe ne correspondent pas</small>   
+            }
           </div>
 
           <div class="mb-3">
@@ -72,7 +100,7 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-login w-100 btn-lg mb-3" [disabled]="!registerForm.valid">
+          <button type="submit" class="btn btn-login w-100 btn-lg mb-3" [disabled]="registerForm.invalid">
             Sign up
           </button>
 

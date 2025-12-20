@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { interval, map, startWith, type Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home-component',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './home-component.html',
   styleUrl: './home-component.css',
 })
