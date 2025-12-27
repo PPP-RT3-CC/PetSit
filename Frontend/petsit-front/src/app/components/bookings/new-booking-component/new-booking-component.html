@@ -1,0 +1,74 @@
+<div class="container py-5">
+
+  <h2 class="fw-bold text-center mb-4">Request a Booking</h2>
+
+  @if (sitterId) {
+    <div class="alert alert-info mb-4">
+      Booking request for sitter ID:
+      <strong>{{ sitterId }}</strong>
+    </div>
+  }
+
+  <form
+    #bookingForm="ngForm"
+    (ngSubmit)="onSubmit(bookingForm)"
+    class="card p-4 shadow-sm">
+
+    <!-- Animal -->
+    <div class="mb-3">
+      <label class="form-label fw-bold">Animal Type</label>
+      <input
+        type="text"
+        class="form-control form-control-lg"
+        placeholder="Dog, Cat..."
+        name="animalType"
+        ngModel
+        required>
+    </div>
+
+    <!-- Dates -->
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label class="form-label fw-bold">Start Date</label>
+        <input
+          type="date"
+          class="form-control form-control-lg"
+          name="startDate"
+          ngModel
+          required>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label fw-bold">End Date</label>
+        <input
+          type="date"
+          class="form-control form-control-lg"
+          name="endDate"
+          ngModel
+          required>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-4">
+      <label class="form-label fw-bold">Description</label>
+      <textarea
+        class="form-control form-control-lg"
+        rows="4"
+        placeholder="Tell the sitter about your pet"
+        name="description"
+        ngModel
+        required>
+      </textarea>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-secondary btn-lg w-100"
+      [disabled]="bookingForm.invalid">
+      Send Booking Request
+    </button>
+
+  </form>
+
+</div>
