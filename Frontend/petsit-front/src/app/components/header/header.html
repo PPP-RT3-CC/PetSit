@@ -9,13 +9,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/']" routerLinkActive="active text-primary">Home</a>
+          <a class="nav-link" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active text-primary">Login</a>
+          <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/sitters']" routerLinkActive="active text-primary">Sitters</a>
+          <a class="nav-link" [routerLink]="['/sitters']" routerLinkActive="active">Sitters</a>
         </li>
 
      
