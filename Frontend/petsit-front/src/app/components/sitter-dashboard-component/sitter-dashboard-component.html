@@ -1,0 +1,62 @@
+<div class="container py-5">
+
+  <div class="paw-decoration paw-2">🐾</div>
+  <div class="paw-decoration paw-4">🐾</div>
+  <div class="paw-decoration paw-5">🐾</div>
+  <div class="paw-decoration paw-6">🐾</div>
+
+
+  <h2 class="fw-bold text-center mb-4">Sitter Dashboard</h2>
+
+  <div class="row g-4">
+    @if (requests.length ===0){
+    <div class="col-12 text-center">
+        <div class="text-center pet-light p-5 rounded shadow-sm">
+            <h4 >You have no requests at the moment.</h4>
+
+      </div>
+    </div>
+    }
+    @for (req of requests; track req.id) {
+      <div class="col-md-6 col-lg-4">
+
+<div class="card bg-light text-center p-4 rounded shadow-sm h-100 border-0 ">
+          <div class="card-body text-center">
+
+            <h5 class="fw-bold mb-3">{{ req.animalType }} Care</h5>
+
+            <p class="mb-1"><strong>Owner:</strong> {{ req.ownerName }}</p>
+            <p class="mb-1">{{ req.startDate }} → {{ req.endDate }}</p>
+            <p class="mb-3 text-muted">{{ req.description }}</p>
+
+            <span class="badge mb-3"
+              [ngClass]="{
+                'bg-secondary': req.status === 'pending',
+                'bg-success': req.status === 'accepted',
+                'bg-danger': req.status === 'refused'
+              }">
+              {{ req.status | titlecase }}
+            </span>
+
+            @if (req.status === 'pending') {
+              <div class="d-flex justify-content-center gap-3 mt-3">
+                <button class="btn btn-outline-success btn-sm"
+                        (click)="acceptRequest(req.id)">
+                  Accept
+                </button>
+                <button class="btn btn-outline-danger btn-sm"
+                        (click)="refuseRequest(req.id)">
+                  Refuse
+                </button>
+              </div>
+            }
+
+          </div>
+        </div>
+
+      </div>
+    }
+
+  </div>
+</div>
+

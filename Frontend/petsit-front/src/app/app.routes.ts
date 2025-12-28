@@ -6,6 +6,7 @@ import { MainLayout } from './components/layouts/main-layout/main-layout';
 import { AuthLayout } from './components/layouts/auth-layout/auth-layout';
 import { SittersComponent } from './components/sitters-component/sitters-component';
 import { NewBookingComponent } from './components/bookings/new-booking-component/new-booking-component';
+import { SitterDashboardComponent } from './components/sitter-dashboard-component/sitter-dashboard-component';
 
 
 export const routes: Routes = [
@@ -14,7 +15,8 @@ export const routes: Routes = [
         children: [
         {path:'', component: HomeComponent},
         {path:'sitters', component: SittersComponent},
-        {path: 'bookings/new', component: NewBookingComponent }
+        {path: 'bookings/new', component: NewBookingComponent },
+        {path: 'sitter', component: SitterDashboardComponent}
         ]
     },
     {
