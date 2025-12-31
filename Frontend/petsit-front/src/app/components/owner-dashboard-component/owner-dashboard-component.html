@@ -1,0 +1,87 @@
+<div class="container py-5 bg-soft-pink min-vh-100">
+
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-5">
+    <div>
+      <h2 class="fw-bold text-dark mb-1">My Requests</h2>
+      <p class="text-muted mb-0">
+        Manage your pet sitting requests easily
+      </p>
+    </div>
+
+    <button
+      class="btn btn-outline-dark btn-lg"
+      routerLink="/owner/new-request">
+      + Create Request
+    </button>
+  </div>
+
+  <!-- Requests List -->
+  <div class="row g-4">
+
+    <!-- Request Card -->
+    @for (req of requests; track req.id) {
+      <div class="col-md-6 col-lg-4">
+
+        <div class="card bg-white shadow-sm border-0 h-100">
+          <div class="card-body d-flex flex-column">
+
+            <!-- Title -->
+            <h5 class="fw-bold text-dark mb-2">
+              {{ req.animalType }} Sitting
+            </h5>
+
+            <!-- Info -->
+            <p class="text-muted mb-1">
+              <strong>Pet:</strong> {{ req.petName }}
+            </p>
+
+            <p class="text-muted mb-1">
+              <strong>Dates:</strong>
+{{ req.startDate | date:'mediumDate' }} →
+{{ req.endDate | date:'mediumDate' }}            </p>
+
+            <p class="text-muted mb-3">
+              {{ req.description }}
+            </p>
+
+            <!-- Status -->
+            <div class="mt-auto">
+              @if (req.status === 'pending') {
+                <span class="badge bg-secondary">
+                  Pending
+                </span>
+              }
+
+              @if (req.status === 'accepted') {
+                <span class="badge bg-success-subtle text-success">
+                  Accepted
+                </span>
+              }
+
+              @if (req.status === 'refused') {
+                <span class="badge bg-danger-subtle text-danger">
+                  Refused
+                </span>
+              }
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    }
+
+    <!-- Empty State -->
+    @if (requests.length === 0) {
+      <div class="col-12 text-center mt-5">
+        <p class="text-muted fs-5">
+          You haven't created any requests yet.
+        </p>
+
+      </div>
+    }
+
+  </div>
+
+</div>

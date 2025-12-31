@@ -7,6 +7,7 @@ import { AuthLayout } from './components/layouts/auth-layout/auth-layout';
 import { SittersComponent } from './components/sitters-component/sitters-component';
 import { NewBookingComponent } from './components/bookings/new-booking-component/new-booking-component';
 import { SitterDashboardComponent } from './components/sitter-dashboard-component/sitter-dashboard-component';
+import { OwnerDashboardComponent } from './components/owner-dashboard-component/owner-dashboard-component';
 
 
 export const routes: Routes = [
@@ -16,7 +17,10 @@ export const routes: Routes = [
         {path:'', component: HomeComponent},
         {path:'sitters', component: SittersComponent},
         {path: 'bookings/new', component: NewBookingComponent },
-        {path: 'sitter', component: SitterDashboardComponent}
+        {path: 'sitter', component: SitterDashboardComponent},
+        {path:  'owner', component:OwnerDashboardComponent},
+        { path: 'owner/new-request', component: NewBookingComponent },
+
         ]
     },
     {

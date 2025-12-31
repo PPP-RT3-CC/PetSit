@@ -26,7 +26,7 @@
             <h5 class="fw-bold mb-3">{{ req.animalType }} Care</h5>
 
             <p class="mb-1"><strong>Owner:</strong> {{ req.ownerName }}</p>
-            <p class="mb-1">{{ req.startDate }} → {{ req.endDate }}</p>
+            <p class="mb-1">{{ req.startDate | date:'mediumDate' }} → {{ req.endDate | date: 'mediumDate' }}</p>
             <p class="mb-3 text-muted">{{ req.description }}</p>
 
             <span class="badge mb-3"

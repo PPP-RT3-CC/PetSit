@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RequestsService } from '../../services/requests-service';
+import { RouterLink } from '@angular/router';
 
 interface Request {
   id: number;
@@ -14,7 +15,7 @@ interface Request {
 
 @Component({
   selector: 'app-sitter-dashboard-component',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './sitter-dashboard-component.html',
   styleUrl: './sitter-dashboard-component.css',
 })
@@ -29,14 +30,13 @@ export class SitterDashboardComponent {
   }
 
 
-  acceptRequest(id: number) {
-    const req = this.requests.find(r => r.id === id);
-    if (req) req.status = 'accepted';
-  }
+acceptRequest(id: number) {
+  this.requests = this.requests.filter(req => req.id !== id);
+}
 
-  refuseRequest(id: number) {
-    const req = this.requests.find(r => r.id === id);
-    if (req) req.status = 'refused';
-  }
+refuseRequest(id: number) {
+  this.requests = this.requests.filter(req => req.id !== id);
+}
+
 
 }
