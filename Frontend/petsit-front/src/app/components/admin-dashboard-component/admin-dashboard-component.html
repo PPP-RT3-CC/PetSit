@@ -1,0 +1,69 @@
+<div class="container-fluid admin-dashboard">
+  <div class="admin-header text-center">
+    <h1 class="display-4">Admin Dashboard</h1>
+    <p class="lead">User and Request Management</p>
+  </div>
+
+  <ul class="nav nav-tabs mb-4" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button 
+        class="nav-link" 
+        [class.active]="activeTab() === 'owners'" 
+        (click)="setActiveTab('owners')"
+        type="button">
+        <i class="bi bi-people-fill me-2"></i>Owners
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button 
+        class="nav-link" 
+        [class.active]="activeTab() === 'sitters'" 
+        (click)="setActiveTab('sitters')"
+        type="button">
+        <i class="bi bi-person-badge-fill me-2"></i>Sitters
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button 
+        class="nav-link" 
+        [class.active]="activeTab() === 'requests'" 
+        (click)="setActiveTab('requests')"
+        type="button">
+        <i class="bi bi-clipboard-check-fill me-2"></i>Requests
+      </button>
+    </li>
+  </ul>
+
+  <!-- Owners Tab -->
+  @if (activeTab() === 'owners') {
+    <app-admin-table
+      [title]="'Owners List'"
+      [count]="ownersCount()"
+      [columns]="ownerColumns"
+      [data]="owners()"
+      (onDelete)="deleteOwner($event)">
+    </app-admin-table>
+  }
+
+  <!-- Sitters Tab -->
+  @if (activeTab() === 'sitters') {
+    <app-admin-table
+      [title]="'Sitters List'"
+      [count]="sittersCount()"
+      [columns]="sitterColumns"
+      [data]="sitters()"
+      (onDelete)="deleteSitter($event)">
+    </app-admin-table>
+  }
+
+  <!-- Requests Tab -->
+  @if (activeTab() === 'requests') {
+    <app-admin-table
+      [title]="'Requests List'"
+      [count]="requestsCount()"
+      [columns]="requestColumns"
+      [data]="requests()"
+      (onDelete)="deleteRequest($event)">
+    </app-admin-table>
+  }
+</div>

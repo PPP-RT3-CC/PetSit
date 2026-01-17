@@ -1,0 +1,173 @@
+.tab-content {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.section-header h2 {
+  color: #748048;
+  font-size: 1.8rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+.count {
+  background: #f688bb;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(246, 136, 187, 0.3);
+}
+
+.custom-card {
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.custom-table thead {
+  background: linear-gradient(135deg, #748048 0%, #5c6639 100%);
+}
+
+.custom-table thead th {
+  color: white;
+  padding: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  border: none;
+  text-align: left;
+}
+
+.custom-table tbody tr {
+  transition: all 0.2s ease;
+  border-bottom: 1px solid #e9cbc1;
+}
+
+.custom-table tbody tr:hover {
+  background-color: #e8f9e9;
+  transform: scale(1.001);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.custom-table tbody td {
+  padding: 1.2rem;
+  color: #333;
+  vertical-align: middle;
+}
+
+.custom-table tbody td strong {
+  color: #748048;
+  font-weight: 600;
+}
+
+.btn-delete {
+  background: #f688bb;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.btn-delete:hover {
+  background: #e5779f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(246, 136, 187, 0.4);
+}
+
+.btn-delete:active {
+  transform: translateY(0);
+}
+
+.availability-badge {
+  background: #9de3d0;
+  color: #2c5f5f;
+  padding: 0.4rem 0.9rem;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: inline-block;
+}
+
+.pet-type-badge {
+  background: #baf1a1;
+  color: #3d5c1f;
+  padding: 0.4rem 0.9rem;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: inline-block;
+}
+
+.status-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: inline-block;
+  text-transform: capitalize;
+}
+
+.status-pending {
+  background: #fff4e6;
+  color: #ff9800;
+}
+
+.status-accepted {
+  background: #e8f5e9;
+  color: #4caf50;
+}
+
+.status-refused {
+  background: #ffebee;
+  color: #f44336;
+}
+
+.description-cell {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

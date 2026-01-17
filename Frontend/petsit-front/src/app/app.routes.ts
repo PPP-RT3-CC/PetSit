@@ -8,6 +8,7 @@ import { SittersComponent } from './components/sitters-component/sitters-compone
 import { NewBookingComponent } from './components/bookings/new-booking-component/new-booking-component';
 import { SitterDashboardComponent } from './components/sitter-dashboard-component/sitter-dashboard-component';
 import { OwnerDashboardComponent } from './components/owner-dashboard-component/owner-dashboard-component';
+import { AdminDashboardComponent } from './components/admin-dashboard-component/admin-dashboard-component';
 
 
 export const routes: Routes = [
@@ -20,6 +21,7 @@ export const routes: Routes = [
         {path: 'sitter', component: SitterDashboardComponent},
         {path:  'owner', component:OwnerDashboardComponent},
         { path: 'owner/new-request', component: NewBookingComponent },
+        { path: 'admin', component: AdminDashboardComponent },
 
         ]
     },

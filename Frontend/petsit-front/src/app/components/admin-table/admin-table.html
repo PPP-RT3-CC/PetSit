@@ -1,0 +1,55 @@
+<div class="tab-content">
+  <div class="section-header">
+    <h2>{{ title() }}</h2>
+    <span class="count">{{ count() }} {{ title().toLowerCase() }}</span>
+  </div>
+  
+  <div class="card custom-card">
+    <div class="table-responsive">
+      <table class="custom-table">
+        <thead>
+          <tr>
+            @for (column of columns(); track column.key) {
+              <th [class.text-center]="column.align === 'center'" 
+                  [class.text-end]="column.align === 'right'">
+                {{ column.label }}
+              </th>
+            }
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of data(); track item.id) {
+            <tr>
+              @for (column of columns(); track column.key) {
+                <td [class.text-center]="column.align === 'center'" 
+                    [class.text-end]="column.align === 'right'"
+                    [class.description-cell]="column.key === 'description'">
+                  @if (column.type === 'strong') {
+                    <strong>{{ getCellValue(item, column) }}</strong>
+                  } @else if (column.type === 'badge') {
+                    <span [class]="column.badgeClass || 'badge'">
+                      {{ getCellValue(item, column) }}
+                    </span>
+                  } @else if (column.type === 'status') {
+                    <span class="status-badge" 
+                      [class]="'status-badge ' + getStatusClass(getCellValue(item, column))">
+                      {{ getCellValue(item, column) | titlecase }}
+                    </span>
+                  } @else {
+                    {{ getCellValue(item, column) }}
+                  }
+                </td>
+              }
+              <td class="text-center">
+                <button class="btn-delete" (click)="deleteItem(item.id)">
+                  <i class="bi bi-trash-fill"></i> Delete
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
