@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, type NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { BookingService } from '../../../services/booking-service';
+import { RequestsService } from './../../../services/requests-service';
 
 @Component({
   selector: 'app-new-booking-component',
@@ -16,7 +16,7 @@ export class NewBookingComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private bookingService: BookingService
+    private requestsService: RequestsService
   ) {}
 
   ngOnInit(): void {
@@ -32,7 +32,7 @@ export class NewBookingComponent implements OnInit {
         ...bookingForm.value
       };
 
-      this.bookingService.createBooking(data).subscribe(() => {
+      this.requestsService.createRequest(data).subscribe(() => {
         alert('Booking request sent');
       });
     }

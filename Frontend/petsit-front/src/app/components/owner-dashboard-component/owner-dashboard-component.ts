@@ -1,17 +1,9 @@
+import { Request } from './../../data/requests.mock';
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { OwnerRequestsService } from '../../services/owner-requests-service';
+import { RequestsService } from '../../services/requests-service';
 
-export interface OwnerRequest {
-  id: number;
-  animalType: string;
-  petName: string;
-  startDate: string;
-  endDate: string;
-  description: string;
-  status: 'pending' | 'accepted' | 'refused';
-}
 
 @Component({
   selector: 'app-owner-dashboard-component',
@@ -20,19 +12,20 @@ export interface OwnerRequest {
   styleUrl: './owner-dashboard-component.css',
 })
 export class OwnerDashboardComponent {
-   private ownerRequestsService = inject(OwnerRequestsService);
+  private requestsService = inject(RequestsService);
 
-  requests: OwnerRequest[] = [];
+  ownerId: number = 1; //we'll get it from auth
+  ownerRequests: Request[] = [];
 
   ngOnInit(): void {
     this.loadRequests();
   }
 
   private loadRequests(): void {
-    this.ownerRequestsService
-      .getOwnerRequests()
+    this.requestsService
+      .getOwnerRequests(this.ownerId)
       .subscribe(requests => {
-        this.requests = requests;
+        this.ownerRequests = requests;
       });
   }
 

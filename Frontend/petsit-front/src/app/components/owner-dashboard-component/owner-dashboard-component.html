@@ -20,7 +20,7 @@
   <div class="row g-4">
 
     <!-- Request Card -->
-    @for (req of requests; track req.id) {
+    @for (req of ownerRequests; track req.id) {
       <div class="col-md-6 col-lg-4">
 
         <div class="card bg-white shadow-sm border-0 h-100">
@@ -73,7 +73,7 @@
     }
 
     <!-- Empty State -->
-    @if (requests.length === 0) {
+    @if (ownerRequests.length === 0) {
       <div class="col-12 text-center mt-5">
         <p class="text-muted fs-5">
           You haven't created any requests yet.

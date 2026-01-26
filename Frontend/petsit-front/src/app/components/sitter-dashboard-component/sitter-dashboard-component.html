@@ -9,7 +9,7 @@
   <h2 class="fw-bold text-center mb-4">Sitter Dashboard</h2>
 
   <div class="row g-4">
-    @if (requests.length ===0){
+    @if (sitterRequests.length ===0){
     <div class="col-12 text-center">
         <div class="text-center pet-light p-5 rounded shadow-sm">
             <h4 >You have no requests at the moment.</h4>
@@ -17,7 +17,7 @@
       </div>
     </div>
     }
-    @for (req of requests; track req.id) {
+    @for (req of sitterRequests; track req.id) {
       <div class="col-md-6 col-lg-4">
 
 <div class="card bg-light text-center p-4 rounded shadow-sm h-100 border-0 ">

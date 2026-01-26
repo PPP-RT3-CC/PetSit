@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { SITTERS } from '../data/sitters.mock';
-import { requests } from '../data/requests.mock';
+import { REQUESTS as requests } from '../data/requests.mock';
 import { Sitter } from '../components/sitters-component/sitters-component';
 import { Request } from '../data/requests.mock';
 
