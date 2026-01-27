@@ -1,4 +1,4 @@
-import type { Sitter } from "../components/sitters-component/sitters-component";
+import type { Sitter } from "../models/sitter.model";
 
 
 export const SITTERS: Sitter[] = [

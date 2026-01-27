@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { SITTERS } from '../data/sitters.mock';
 import { REQUESTS as requests } from '../data/requests.mock';
-import { Sitter } from '../components/sitters-component/sitters-component';
+import { Sitter } from '../models/sitter.model';
 import { Request } from '../data/requests.mock';
 
 // Mock Owner interface and data

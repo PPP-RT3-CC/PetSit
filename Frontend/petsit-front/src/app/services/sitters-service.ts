@@ -1,15 +1,19 @@
-import { Injectable } from '@angular/core';
-import { SITTERS } from '../data/sitters.mock';
-import { Observable, of } from 'rxjs';
-import { Sitter } from '../components/sitters-component/sitters-component';
+import { Injectable, inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Sitter } from '../models/sitter.model'
+import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class SittersService {
-    //  mock version 
-        getSitters(): Observable<Sitter[]> {
-          return of(SITTERS);
-        }
+
+    private http = inject(HttpClient);
+    private API_URL = 'http://localhost:3000/users/sitters';
+
+    getSitters(): Observable<Sitter[]> {
+        return this.http.get<Sitter[]>(this.API_URL);
+    }
     
 }

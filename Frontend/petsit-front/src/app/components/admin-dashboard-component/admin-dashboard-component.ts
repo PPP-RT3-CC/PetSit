@@ -1,7 +1,7 @@
 import { Component, signal, computed, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminService, Owner } from '../../services/admin-service';
-import { Sitter } from '../sitters-component/sitters-component';
+import { Sitter } from '../../models/sitter.model';
 import { Request } from '../../data/requests.mock';
 import { AdminTableComponent, TableColumn } from '../admin-table/admin-table';
 

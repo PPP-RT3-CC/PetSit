@@ -2,15 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { SittersService } from './../../services/sitters-service';
+import { Sitter } from '../../models/sitter.model';
 
-
-export interface Sitter {
-  id: number;
-  firstname: string;
-  lastname: string;
-  description: string;
-  availability: string;
-}
 
 @Component({
   selector: 'app-sitters-component',
@@ -30,6 +23,7 @@ export class SittersComponent implements OnInit {
   ngOnInit(): void {
     this.sittersService.getSitters().subscribe(data => {
       this.sitters = data;
+      console.log('Fetched sitters:', this.sitters);
     });
   }
 
