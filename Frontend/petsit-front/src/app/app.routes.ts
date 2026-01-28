@@ -20,7 +20,6 @@ export const routes: Routes = [
         {path: 'bookings/new', component: NewBookingComponent },
         {path: 'sitter', component: SitterDashboardComponent},
         {path:  'owner', component:OwnerDashboardComponent},
-        { path: 'owner/new-request', component: NewBookingComponent },
         { path: 'admin', component: AdminDashboardComponent },
 
         ]

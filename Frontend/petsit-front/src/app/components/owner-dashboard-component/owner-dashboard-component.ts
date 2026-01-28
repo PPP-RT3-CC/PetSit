@@ -7,13 +7,29 @@ import { RequestsService } from '../../services/requests-service';
 
 @Component({
   selector: 'app-owner-dashboard-component',
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule],
   templateUrl: './owner-dashboard-component.html',
   styleUrl: './owner-dashboard-component.css',
 })
 export class OwnerDashboardComponent {
   private requestsService = inject(RequestsService);
+  ownerRequests: Request[] = [];
 
+  ngOnInit(): void {
+    this.loadRequests();
+  }
+
+  private loadRequests(): void {
+    this.requestsService
+      .getOwnerRequests()
+      .subscribe(requests => {
+        this.ownerRequests = requests;
+        console.log('Fetched owner requests:', this.ownerRequests);
+      });
+  }
+
+
+  /*
   ownerId: number = 1; //we'll get it from auth
   ownerRequests: Request[] = [];
 
@@ -28,7 +44,7 @@ export class OwnerDashboardComponent {
         this.ownerRequests = requests;
       });
   }
-
+*/
 
   
   

@@ -7,11 +7,43 @@ import type { Request } from '../../data/requests.mock';
 
 @Component({
   selector: 'app-sitter-dashboard-component',
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule],
   templateUrl: './sitter-dashboard-component.html',
   styleUrl: './sitter-dashboard-component.css',
 })
 export class SitterDashboardComponent {
+
+  sitterRequests: Request[] = [];
+
+  private requestsService = inject(RequestsService);
+  ngOnInit(): void {
+    this.loadRequests();
+  }
+
+  private loadRequests(): void {
+    this.requestsService
+      .getSitterRequests()
+      .subscribe(requests => {
+        this.sitterRequests = requests;
+        console.log('Fetched sitter requests:', this.sitterRequests);
+      });
+  }
+
+
+//make accept and refuse functions later update the requestsservice 
+acceptRequest(id: number) {
+    this.requestsService.acceptRequest(id)
+      .subscribe(() => this.loadRequests());
+}
+
+refuseRequest(id: number) {
+  this.requestsService.refuseRequest(id)
+    .subscribe(() => this.loadRequests());
+}
+
+
+/*
+  
   sitterId: number = 101; //well get it from auth
   sitterRequests: Request[] = [];
 
@@ -27,15 +59,6 @@ export class SitterDashboardComponent {
         this.sitterRequests = requests;
       });
   }
-
-//make accept and refuse functions later update the requestsservice 
-acceptRequest(id: number) {
-  this.sitterRequests = this.sitterRequests.filter(req => req.id !== id);
-}
-
-refuseRequest(id: number) {
-  this.sitterRequests = this.sitterRequests.filter(req => req.id !== id);
-}
-
+*/
 
 }

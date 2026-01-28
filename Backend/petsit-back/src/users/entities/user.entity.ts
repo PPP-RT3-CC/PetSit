@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { UserRole } from '../../Enums/roles.enum';
+import { Request } from 'src/requests/entities/request.entity';
 
 @Entity('users')
 export class User {
@@ -31,5 +32,10 @@ export class User {
   @Column({ nullable: true })
   availability?: string; //only for sitters
 
+  @OneToMany(() => Request, request => request.owner)
+  ownerRequests: Request[];
+
+  @OneToMany(() => Request, request => request.sitter)
+  sitterRequests: Request[];
 
 }
