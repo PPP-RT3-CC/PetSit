@@ -7,7 +7,7 @@ import { Sitter } from '../../models/sitter.model';
 
 @Component({
   selector: 'app-sitters-component',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './sitters-component.html',
   styleUrl: './sitters-component.css',
 })

@@ -34,6 +34,7 @@ export class NewBookingComponent implements OnInit {
 
       this.requestsService.createRequest(data).subscribe(() => {
         alert('Booking request sent');
+        bookingForm.reset();
       });
     }
   }

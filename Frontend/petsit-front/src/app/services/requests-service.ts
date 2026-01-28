@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Request, REQUESTS} from '../data/requests.mock';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable({
@@ -9,20 +10,32 @@ import { Request, REQUESTS} from '../data/requests.mock';
 
 export class RequestsService {
 
-  getSitterRequests(sitterId: number): Observable<Request[]>{
-    return of(REQUESTS.filter(r => r.sitterId === sitterId));
+  private http = inject(HttpClient);
+  private API_URL = 'http://localhost:3000/requests';
+
+  getSitterRequests(): Observable<Request[]>{
+    return this.http.get<Request[]>(`${this.API_URL}/owner`);
   }
 
-  getOwnerRequests(ownerId: number): Observable<Request[]> {
-      return of(REQUESTS.filter(r => r.ownerId === ownerId));
+  getOwnerRequests(): Observable<Request[]> {
+      return this.http.get<Request[]>(`${this.API_URL}/sitter`);
     }
 
-  createRequest(data: Request): Observable<any> {
+  createRequest(data: Request): Observable<Request> {
     console.log('Mock Request:', data); 
-    return of({ success: true });       
+    return this.http.post<Request>(`${this.API_URL}`, data);    
   }
   ///accept request function
+
+  acceptRequest(id: number): Observable<Request> {
+    return this.http.patch<Request>(`${this.API_URL}/${id}/accept`, {});
+  }
+
   ///refuse request function
+
+  refuseRequest(id: number): Observable<Request> {
+    return this.http.patch<Request>(`${this.API_URL}/${id}/refuse`, {});
+  }
 
 
     

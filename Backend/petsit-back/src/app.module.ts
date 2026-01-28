@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -6,6 +6,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
 import { AuthModule } from './auth/auth.module';
+import { RequestsModule } from './requests/requests.module';
+import { Request } from './requests/entities/request.entity';
 
 @Module({
   imports: [
@@ -22,13 +24,14 @@ import { AuthModule } from './auth/auth.module';
         username: configService.get<string>('DB_USER'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
-        entities: [User],
-        autoLoadEntities: true,
-        synchronize: true,
+        entities: [User, Request],
+        autoLoadEntities: true, 
+        synchronize: true, 
       }),
     }),
     UsersModule,
     AuthModule,
+    RequestsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
