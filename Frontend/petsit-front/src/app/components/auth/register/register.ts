@@ -19,11 +19,12 @@ export class Register {
     if (registerForm.valid) {
       if (registerForm.value.password !== registerForm.value.confirmPassword) {
         alert('Les mots de passe ne correspondent pas');
+        return;
       }
     }
     this.authService.register(registerForm.value).subscribe({
       next: () => {
-        //this.router.navigate(['/login']);
+        this.router.navigate(['/login']);
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Erreur inscription';
