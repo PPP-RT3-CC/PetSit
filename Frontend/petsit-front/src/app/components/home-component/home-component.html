@@ -4,8 +4,9 @@
   <div class="text-center mb-5 pet-light p-5 rounded">
     <h1 class="display-4 fw-bold">Welcome to PetSit</h1>
     <p class="lead">Find the perfect sitter for your beloved pets — safe, reliable, and convenient!</p>
+    @if (!isLoggedIn) {
     <a routerLink="/register" class="btn btn-secondary btn-lg me-2">Sign Up</a>
-    <a routerLink="/login" class="btn btn-secondary btn-lg me-2">Login</a>
+    <a routerLink="/login" class="btn btn-secondary btn-lg me-2">Login</a>}
     <div class="mt-4">
       <img src="assets/images/pets.png" alt="Happy pets" class="img-fluid rounded" style="max-height:250px;">
     </div>
@@ -15,7 +16,7 @@
   <div class="row g-4">
 
     <!-- Owner Card -->
-    <div class="col-md-6">
+    <!-- <div class="col-md-6">
       <div class="card  p-3 h-100">
         <div class="card-body text-center">
           <h5 class="card-title fw-bold">Pet Owner</h5>
@@ -23,10 +24,10 @@
           <a routerLink="/owner" class="btn btn-secondary btn-lg me-2">Go to Dashboard</a>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Sitter Card -->
-    <div class="col-md-6">
+    <!-- <div class="col-md-6">
       <div class="card p-3 h-100">
         <div class="card-body text-center">
           <h5 class="card-title fw-bold">Pet Sitter</h5>
@@ -34,7 +35,7 @@
           <a routerLink="/sitter" class="btn btn-secondary btn-lg me-2">Go to Dashboard</a>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Meet Some Adorable Pets Carousel -->
     <div class="container py-5">

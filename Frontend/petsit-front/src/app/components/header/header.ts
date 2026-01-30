@@ -9,5 +9,21 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './header.css',
 })
 export class Header {
+  role = 'owner';
 
+get dashboardLink(): string {
+  switch (this.role) {
+    case 'owner':
+      return '/owner';
+
+    case 'sitter':
+      return '/sitter';
+
+    case 'admin':
+      return '/admin';
+
+    default:
+      return '/';
+  }
+}
 }

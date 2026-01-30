@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { interval, map, startWith, type Observable } from 'rxjs';
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-home-component',
@@ -10,6 +11,8 @@ import { interval, map, startWith, type Observable } from 'rxjs';
   styleUrl: './home-component.css',
 })
 export class HomeComponent {
+  //auth = inject(Auth);
+  isLoggedIn=false;//baad mel authService
   pets = [
     { name: 'Besbis', type: 'Cat', image: 'assets/images/cat.jpg' },
     { name: 'Batta', type: 'Duck', image: 'assets/images/duck.jpg' },
