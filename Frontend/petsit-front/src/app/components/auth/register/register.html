@@ -87,6 +87,69 @@
           </div>
 
           <div class="mb-3">
+          <label class="form-label">I am a:</label>
+          <div class="form-check">
+            <input class="form-check-input"
+                  type="radio"
+                  name="role"
+                  value="owner"
+                  ngModel
+                  (change)="onRoleChange('owner')"
+                  required>
+
+            <label class="form-check-label">
+              Pet Owner
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input"
+                  type="radio"
+                  name="role"
+                  value="sitter"
+                  ngModel
+                  (change)="onRoleChange('sitter')"
+                  required>
+
+            <label class="form-check-label">
+              Pet Sitter
+            </label>
+          </div>
+        </div>
+      
+        <!-- Enter description and availability if registering as a sitter: -->
+        @if (role === 'sitter') {
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control"
+                      id="description"
+                      placeholder="Describe yourself"
+                      ngModel
+                      name="description"
+                      required
+                      #description="ngModel"></textarea>
+            @if(description.invalid && description.touched) {
+              <small class="text-danger">Description is required</small>
+            }
+          </div>
+
+          <div class="mb-3">
+            <label for="availability" class="form-label">Availability</label>
+            <input type="text"
+                  class="form-control"
+                  id="availability"
+                  placeholder="Enter your availability"
+                  ngModel
+                  name="availability"
+                  required
+                  #availability="ngModel">
+            @if(availability.invalid && availability.touched) {
+            <small class="text-danger">Availability is required</small>
+            }
+          </div>
+      }
+
+          <div class="mb-3">
             <div class="form-check">
               <input type="checkbox" class="form-check-input" id="agreeTerms"
                      ngModel

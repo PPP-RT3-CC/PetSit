@@ -17,12 +17,17 @@ export class AuthService {
   ) {}
 
   async register(dto: RegisterDto) {
+
+    // eviter que quelqu'un s'enregistre en tant qu'admin de postman
+    if (dto.role === UserRole.ADMIN) {
+      throw new UnauthorizedException('Cannot register as admin');
+   }
     const hashedPassword = await bcrypt.hash(dto.password, 10);
 
     const user = this.userRepository.create({
       ...dto,
       password: hashedPassword,
-      role: UserRole.OWNER,
+      role: dto.role,
     });
 
     await this.userRepository.save(user);
