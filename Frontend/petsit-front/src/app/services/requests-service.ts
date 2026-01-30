@@ -14,11 +14,11 @@ export class RequestsService {
   private API_URL = 'http://localhost:3000/requests';
 
   getSitterRequests(): Observable<Request[]>{
-    return this.http.get<Request[]>(`${this.API_URL}/owner`);
+    return this.http.get<Request[]>(`${this.API_URL}/sitter`);
   }
 
   getOwnerRequests(): Observable<Request[]> {
-      return this.http.get<Request[]>(`${this.API_URL}/sitter`);
+      return this.http.get<Request[]>(`${this.API_URL}/owner`);
     }
 
   createRequest(data: Request): Observable<Request> {

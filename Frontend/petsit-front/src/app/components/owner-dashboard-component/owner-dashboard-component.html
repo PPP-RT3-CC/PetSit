@@ -10,12 +10,25 @@
     </div>
 
   </div>
+     @if (ownerRequests$ | async; as ownerRequests){
+    @if (ownerRequests.length === 0) {
+      <div class="col-12 text-center mt-5">
+        <p class="text-muted fs-5">
+          You haven't created any requests yet.
+        </p>
+
+      </div>
+    }
+        @else{
 
   <!-- Requests List -->
   <div class="row g-4">
 
     <!-- Request Card -->
-    @for (req of ownerRequests; track req.id) {
+     
+
+    @for (req of ownerRequests ; track req.id) {
+
       <div class="col-md-6 col-lg-4">
 
         <div class="card bg-white shadow-sm border-0 h-100">
@@ -65,18 +78,16 @@
         </div>
 
       </div>
-    }
+    
+  }
 
-    <!-- Empty State -->
-    @if (ownerRequests.length === 0) {
-      <div class="col-12 text-center mt-5">
-        <p class="text-muted fs-5">
-          You haven't created any requests yet.
-        </p>
 
-      </div>
-    }
-
+    
   </div>
+  }
+   }
+    <!-- Empty State -->
+
+
 
 </div>
