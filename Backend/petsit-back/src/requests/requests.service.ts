@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateRequestDto } from './dto/create-request.dto';
 import { UpdateRequestDto } from './dto/update-request.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Request } from './entities/request.entity';
 import { User } from 'src/users/entities/user.entity';
+import { RequestStatus } from 'src/Enums/requests.enum';
 
 
 @Injectable()
@@ -41,8 +42,33 @@ export class RequestsService {
   findBySitter(sitterId: number) {
     return this.requestRepo.find({ where: { sitter: { id: sitterId } } });
   }
-  
+  async acceptRequest(id: number) {
+  const request = await this.requestRepo.findOne({
+    where: { id },
+  });
 
+  if (!request) {
+    throw new NotFoundException(`Request with id ${id} not found`);
+  }
+
+  request.status = RequestStatus.ACCEPTED;
+
+  return await this.requestRepo.save(request);
+}
+
+  async refuseRequest(id: number) {
+  const request = await this.requestRepo.findOne({
+    where: { id },
+  });
+
+  if (!request) {
+    throw new NotFoundException(`Request with id ${id} not found`);
+  }
+
+  request.status = RequestStatus.REFUSED;
+
+  return await this.requestRepo.save(request);
+}
   /*//cli generated crud entry points, could be helpful
   create(createRequestDto: CreateRequestDto) {
     return 'This action adds a new request';

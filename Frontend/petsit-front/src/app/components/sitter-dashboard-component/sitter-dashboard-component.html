@@ -7,7 +7,7 @@
 
 
   <h2 class="fw-bold text-center mb-4">Sitter Dashboard</h2>
-
+  @if(sitterRequests$ | async; as sitterRequests){
   <div class="row g-4">
     @if (sitterRequests.length ===0){
     <div class="col-12 text-center">
@@ -56,7 +56,8 @@
 
       </div>
     }
-
+  
   </div>
+}
 </div>
 

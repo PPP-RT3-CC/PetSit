@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { RequestsService } from '../../services/requests-service';
 import { RouterLink } from '@angular/router';
 import type { Request } from '../../data/requests.mock';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -12,34 +13,47 @@ import type { Request } from '../../data/requests.mock';
   styleUrl: './sitter-dashboard-component.css',
 })
 export class SitterDashboardComponent {
-
-  sitterRequests: Request[] = [];
-
   private requestsService = inject(RequestsService);
-  ngOnInit(): void {
-    this.loadRequests();
+  sitterRequests$ : Observable<Request[]> = this.requestsService.getSitterRequests(); 
+
+  acceptRequest(id: number) {
+    this.requestsService.acceptRequest(id).subscribe(() => {
+      this.sitterRequests$ = this.requestsService.getSitterRequests();
+    });
   }
 
-  private loadRequests(): void {
-    this.requestsService
-      .getSitterRequests()
-      .subscribe(requests => {
-        this.sitterRequests = requests;
-        console.log('Fetched sitter requests:', this.sitterRequests);
-      });
+  refuseRequest(id: number) {
+    this.requestsService.refuseRequest(id).subscribe(() => {
+      this.sitterRequests$ = this.requestsService.getSitterRequests();
+    });
   }
+  // sitterRequests: Request[] = [];
+
+  // private requestsService = inject(RequestsService);
+  // ngOnInit(): void {
+  //   this.loadRequests();
+  // }
+
+  // private loadRequests(): void {
+  //   this.requestsService
+  //     .getSitterRequests()
+  //     .subscribe(requests => {
+  //       this.sitterRequests = requests;
+  //       console.log('Fetched sitter requests:', this.sitterRequests);
+  //     });
+  // }
 
 
 //make accept and refuse functions later update the requestsservice 
-acceptRequest(id: number) {
-    this.requestsService.acceptRequest(id)
-      .subscribe(() => this.loadRequests());
-}
+// acceptRequest(id: number) {
+//     this.requestsService.acceptRequest(id)
+//       .subscribe(() => this.loadRequests());
+// }
 
-refuseRequest(id: number) {
-  this.requestsService.refuseRequest(id)
-    .subscribe(() => this.loadRequests());
-}
+// refuseRequest(id: number) {
+//   this.requestsService.refuseRequest(id)
+//     .subscribe(() => this.loadRequests());
+// }
 
 
 /*

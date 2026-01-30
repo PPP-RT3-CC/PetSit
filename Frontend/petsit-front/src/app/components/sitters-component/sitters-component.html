@@ -2,6 +2,16 @@
 
   <h2 class="text-center fw-bold mb-5">Available Pet Sitters</h2>
 
+
+    @if (sitters$ | async; as sitters){
+    @if (sitters.length === 0) {
+      <div class="text-center">
+        <div class="alert alert-info p-5 rounded" role="alert">
+          <h4 class="alert-heading">No Available Sitters</h4>
+          <p>There are no available pet sitters at the moment. Please check back later!</p>
+        </div>
+      </div>
+    } @else {
     @for (sitter of sitters; track sitter.id) {
       <div class="row g-4 mb-4">
       <div class="col-12">
@@ -60,6 +70,7 @@
       </div>
     </div>
     }
-
+    }
+  }
 
 </div>

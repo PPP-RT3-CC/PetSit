@@ -25,10 +25,17 @@ export class RequestsController {
   // Sitter dashboard
   @Get('sitter')
   getSitterRequests(@Request() req) {
-    const sitterId = 1;
+    const sitterId = 4;
     //const sitterId = req.user.id; // jwt auth
     return this.requestsService.findBySitter(sitterId);
   }
+  @Patch(':id/accept')
+  acceptRequest(@Param('id')id){
+    return this.requestsService.acceptRequest(id);  }
+  @Patch(':id/refuse')
+  refuseRequest(@Param('id')id){
+    return this.requestsService.refuseRequest(id);  }
+
 
   /*//cli generated crud entry points, could be helpful
   @Post()

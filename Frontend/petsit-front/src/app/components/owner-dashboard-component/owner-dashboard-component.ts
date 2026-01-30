@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RequestsService } from '../../services/requests-service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -13,20 +14,21 @@ import { RequestsService } from '../../services/requests-service';
 })
 export class OwnerDashboardComponent {
   private requestsService = inject(RequestsService);
-  ownerRequests: Request[] = [];
+  //ownerRequests: Request[] = [];
 
-  ngOnInit(): void {
-    this.loadRequests();
-  }
+  // ngOnInit(): void {
+  //   this.loadRequests();
+  // }
+ownerRequests$: Observable<Request[]> = this.requestsService.getOwnerRequests();
 
-  private loadRequests(): void {
-    this.requestsService
-      .getOwnerRequests()
-      .subscribe(requests => {
-        this.ownerRequests = requests;
-        console.log('Fetched owner requests:', this.ownerRequests);
-      });
-  }
+  // private  loadRequests(): void {
+  //   this.requestsService
+  //     .getOwnerRequests()
+  //     .subscribe(requests => {
+  //       this.ownerRequests = requests;
+  //       console.log('Fetched owner requests:', this.ownerRequests);
+  //     });
+  // }
 
 
   /*

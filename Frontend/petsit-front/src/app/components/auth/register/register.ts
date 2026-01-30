@@ -15,24 +15,29 @@ export class Register {
   private router = inject(Router);
   errorMessage = '';
 
-   onSubmit(registerForm: NgForm){
-    if (registerForm.valid) {
-      if (registerForm.value.password !== registerForm.value.confirmPassword) {
-        alert('Les mots de passe ne correspondent pas');
-        return;
-      }
-    }
-    this.authService.register(registerForm.value).subscribe({
-      next: () => {
-        this.router.navigate(['/login']);
-      },
-      error: (err) => {
-        this.errorMessage = err.error?.message || 'Erreur inscription';
-      },
-      complete: () => {
-        console.log('Register request completed');
-      }
-  });
-    console.log(registerForm)
+  role: string = '';
+  onRoleChange(value: string) {
+    this.role = value;
   }
+
+  onSubmit(registerForm: NgForm){
+  if (registerForm.valid) {
+    if (registerForm.value.password !== registerForm.value.confirmPassword) {
+      alert('Les mots de passe ne correspondent pas');
+      return;
+    }
+  }
+  this.authService.register(registerForm.value).subscribe({
+    next: () => {
+      this.router.navigate(['/login']);
+    },
+    error: (err) => {
+      this.errorMessage = err.error?.message || 'Erreur inscription';
+    },
+    complete: () => {
+      console.log('Register request completed');
+    }
+});
+  console.log(registerForm)
+}
 }
