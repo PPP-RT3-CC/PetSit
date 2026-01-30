@@ -1,8 +1,6 @@
 import { Component, signal, computed, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminService, Owner } from '../../services/admin-service';
-import { Sitter } from '../../models/sitter.model';
-import { Request } from '../../data/requests.mock';
+import { AdminService, Owner, Sitter, Request } from '../../services/admin-service';
 import { AdminTableComponent, TableColumn } from '../admin-table/admin-table';
 
 @Component({
@@ -28,27 +26,28 @@ export class AdminDashboardComponent implements OnInit {
   // Column configurations
   ownerColumns: TableColumn[] = [
     { key: 'id', label: 'ID' },
-    { key: 'name', label: 'Name', type: 'strong' },
+    { key: 'firstname', label: 'First Name', type: 'strong' },
+    { key: 'lastname', label: 'Last Name' },
     { key: 'email', label: 'Email' },
-    { key: 'phone', label: 'Phone' },
-    { key: 'joinDate', label: 'Join Date' }
+    { key: 'role', label: 'Role' }
   ];
 
   sitterColumns: TableColumn[] = [
     { key: 'id', label: 'ID' },
     { key: 'firstname', label: 'First Name', type: 'strong' },
     { key: 'lastname', label: 'Last Name' },
-    { key: 'description', label: 'Description' },
-    { key: 'availability', label: 'Availability', type: 'badge', badgeClass: 'availability-badge' }
+    { key: 'email', label: 'Email' },
+    { key: 'description', label: 'Description' }
   ];
 
   requestColumns: TableColumn[] = [
     { key: 'id', label: 'ID' },
-    { key: 'ownerName', label: 'Owner Name', type: 'strong' },
+    { key: 'petName', label: 'Pet Name', type: 'strong' },
     { key: 'animalType', label: 'Animal Type', type: 'badge', badgeClass: 'pet-type-badge' },
+    { key: 'ownerName', label: 'Owner', computed: (row: any) => `${row.owner.firstname} ${row.owner.lastname}` },
+    { key: 'sitterName', label: 'Sitter', computed: (row: any) => `${row.sitter.firstname} ${row.sitter.lastname}` },
     { key: 'startDate', label: 'Start Date' },
     { key: 'endDate', label: 'End Date' },
-    { key: 'description', label: 'Description' },
     { key: 'status', label: 'Status', type: 'status' }
   ];
 
@@ -83,9 +82,13 @@ export class AdminDashboardComponent implements OnInit {
   deleteOwner(id: number) {
     if (confirm('Are you sure you want to delete this owner?')) {
       this.adminService.deleteOwner(id).subscribe({
-        next: () => {
-          this.owners.update(owners => owners.filter(owner => owner.id !== id));
-          console.log(`Owner ${id} deleted`);
+        next: (response) => {
+          if (response.deleted) {
+            this.owners.update(owners => owners.filter(owner => owner.id !== id));
+            console.log(response.message);
+          } else {
+            console.error(response.message);
+          }
         },
         error: (err) => console.error('Error deleting owner:', err)
       });
@@ -95,9 +98,13 @@ export class AdminDashboardComponent implements OnInit {
   deleteSitter(id: number) {
     if (confirm('Are you sure you want to delete this sitter?')) {
       this.adminService.deleteSitter(id).subscribe({
-        next: () => {
-          this.sitters.update(sitters => sitters.filter(sitter => sitter.id !== id));
-          console.log(`Sitter ${id} deleted`);
+        next: (response) => {
+          if (response.deleted) {
+            this.sitters.update(sitters => sitters.filter(sitter => sitter.id !== id));
+            console.log(response.message);
+          } else {
+            console.error(response.message);
+          }
         },
         error: (err) => console.error('Error deleting sitter:', err)
       });
@@ -107,9 +114,13 @@ export class AdminDashboardComponent implements OnInit {
   deleteRequest(id: number) {
     if (confirm('Are you sure you want to delete this request?')) {
       this.adminService.deleteRequest(id).subscribe({
-        next: () => {
-          this.requests.update(requests => requests.filter(request => request.id !== id));
-          console.log(`Request ${id} deleted`);
+        next: (response) => {
+          if (response.deleted) {
+            this.requests.update(requests => requests.filter(request => request.id !== id));
+            console.log(response.message);
+          } else {
+            console.error(response.message);
+          }
         },
         error: (err) => console.error('Error deleting request:', err)
       });

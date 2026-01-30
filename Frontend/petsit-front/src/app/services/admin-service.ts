@@ -1,60 +1,86 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { SITTERS } from '../data/sitters.mock';
-import { REQUESTS as requests } from '../data/requests.mock';
-import { Sitter } from '../models/sitter.model';
-import { Request } from '../data/requests.mock';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-// Mock Owner interface and data
+const API_URL = 'http://localhost:3000/admin';
+
 export interface Owner {
   id: number;
-  name: string;
+  firstname: string;
+  lastname: string;
   email: string;
-  phone: string;
-  joinDate: string;
+  role: string;
 }
 
-const MOCK_OWNERS: Owner[] = [
-  { id: 1, name: 'John Doe', email: 'john@example.com', phone: '123-456-7890', joinDate: '2024-01-15' },
-  { id: 2, name: 'Jane Smith', email: 'jane@example.com', phone: '098-765-4321', joinDate: '2024-02-20' },
-  { id: 3, name: 'Bob Wilson', email: 'bob@example.com', phone: '555-123-4567', joinDate: '2024-03-10' },
-];
+export interface Sitter {
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  role: string;
+  description?: string;
+}
+
+export interface Request {
+  id: number;
+  animalType: string;
+  petName: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+  status: string;
+  owner: {
+    id: number;
+    firstname: string;
+    lastname: string;
+    email: string;
+  };
+  sitter: {
+    id: number;
+    firstname: string;
+    lastname: string;
+    email: string;
+  };
+}
+
+interface DeleteResponse {
+  deleted: boolean;
+  message: string;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdminService {
-  
+  private http = inject(HttpClient);
+
   // Get all owners
   getOwners(): Observable<Owner[]> {
-    return of(MOCK_OWNERS);
+    return this.http.get<Owner[]>(`${API_URL}/owners`);
   }
 
   // Get all sitters
   getSitters(): Observable<Sitter[]> {
-    return of(SITTERS);
+    return this.http.get<Sitter[]>(`${API_URL}/sitters`);
   }
 
   // Get all requests
   getRequests(): Observable<Request[]> {
-    return of(requests);
+    return this.http.get<Request[]>(`${API_URL}/requests`);
   }
 
   // Delete owner
-  deleteOwner(id: number): Observable<boolean> {
-    // TODO: Replace with actual API call
-    return of(true);
+  deleteOwner(id: number): Observable<DeleteResponse> {
+    return this.http.delete<DeleteResponse>(`${API_URL}/owners/${id}`);
   }
 
   // Delete sitter
-  deleteSitter(id: number): Observable<boolean> {
-    // TODO: Replace with actual API call
-    return of(true);
+  deleteSitter(id: number): Observable<DeleteResponse> {
+    return this.http.delete<DeleteResponse>(`${API_URL}/sitters/${id}`);
   }
 
   // Delete request
-  deleteRequest(id: number): Observable<boolean> {
-    // TODO: Replace with actual API call
-    return of(true);
+  deleteRequest(id: number): Observable<DeleteResponse> {
+    return this.http.delete<DeleteResponse>(`${API_URL}/requests/${id}`);
   }
 }

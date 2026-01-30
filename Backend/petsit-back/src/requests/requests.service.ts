@@ -41,6 +41,7 @@ export class RequestsService {
   findBySitter(sitterId: number) {
     return this.requestRepo.find({ where: { sitter: { id: sitterId } } });
   }
+  
 
   /*//cli generated crud entry points, could be helpful
   create(createRequestDto: CreateRequestDto) {

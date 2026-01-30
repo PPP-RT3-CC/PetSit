@@ -7,6 +7,7 @@ export interface TableColumn {
   type?: 'text' | 'badge' | 'status' | 'strong';
   badgeClass?: string;
   align?: 'left' | 'center' | 'right';
+  computed?: (row: any) => any;
 }
 
 @Component({
@@ -28,6 +29,11 @@ export class AdminTableComponent {
   }
 
   getCellValue(item: any, column: TableColumn): any {
+    // If column has computed function, use it
+    if (column.computed) {
+      return column.computed(item);
+    }
+    
     const keys = column.key.split('.');
     let value = item;
     for (const key of keys) {

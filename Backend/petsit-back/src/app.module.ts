@@ -8,6 +8,7 @@ import { User } from './users/entities/user.entity';
 import { AuthModule } from './auth/auth.module';
 import { RequestsModule } from './requests/requests.module';
 import { Request } from './requests/entities/request.entity';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { Request } from './requests/entities/request.entity';
     UsersModule,
     AuthModule,
     RequestsModule,
+    AdminModule,
   ],
   controllers: [AppController],
   providers: [AppService],
