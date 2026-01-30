@@ -1,5 +1,6 @@
-import { Component, signal, computed, inject, OnInit } from '@angular/core';
+import { Component, signal, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
 import { AdminService, Owner, Sitter, Request } from '../../services/admin-service';
 import { AdminTableComponent, TableColumn } from '../admin-table/admin-table';
 
@@ -12,16 +13,38 @@ import { AdminTableComponent, TableColumn } from '../admin-table/admin-table';
 export class AdminDashboardComponent implements OnInit {
   private adminService = inject(AdminService);
 
-  // Using Angular signals (newest feature)
+  // Using signals for reactive state
   owners = signal<Owner[]>([]);
   sitters = signal<Sitter[]>([]);
   requests = signal<Request[]>([]);
   activeTab = signal<'owners' | 'sitters' | 'requests'>('owners');
 
-  // Computed signals for counts
-  ownersCount = computed(() => this.owners().length);
-  sittersCount = computed(() => this.sitters().length);
-  requestsCount = computed(() => this.requests().length);
+  ngOnInit() {
+    this.loadOwners();
+    this.loadSitters();
+    this.loadRequests();
+  }
+
+  private loadOwners() {
+    this.adminService.getOwners().subscribe({
+      next: (data) => this.owners.set(data),
+      error: (err) => console.error('Error loading owners:', err)
+    });
+  }
+
+  private loadSitters() {
+    this.adminService.getSitters().subscribe({
+      next: (data) => this.sitters.set(data),
+      error: (err) => console.error('Error loading sitters:', err)
+    });
+  }
+
+  private loadRequests() {
+    this.adminService.getRequests().subscribe({
+      next: (data) => this.requests.set(data),
+      error: (err) => console.error('Error loading requests:', err)
+    });
+  }
 
   // Column configurations
   ownerColumns: TableColumn[] = [
@@ -51,30 +74,6 @@ export class AdminDashboardComponent implements OnInit {
     { key: 'status', label: 'Status', type: 'status' }
   ];
 
-  ngOnInit() {
-    this.loadData();
-  }
-
-  loadData() {
-    // Load owners
-    this.adminService.getOwners().subscribe({
-      next: (data) => this.owners.set(data),
-      error: (err) => console.error('Error loading owners:', err)
-    });
-
-    // Load sitters
-    this.adminService.getSitters().subscribe({
-      next: (data) => this.sitters.set(data),
-      error: (err) => console.error('Error loading sitters:', err)
-    });
-
-    // Load requests
-    this.adminService.getRequests().subscribe({
-      next: (data) => this.requests.set(data),
-      error: (err) => console.error('Error loading requests:', err)
-    });
-  }
-
   setActiveTab(tab: 'owners' | 'sitters' | 'requests') {
     this.activeTab.set(tab);
   }
@@ -84,7 +83,7 @@ export class AdminDashboardComponent implements OnInit {
       this.adminService.deleteOwner(id).subscribe({
         next: (response) => {
           if (response.deleted) {
-            this.owners.update(owners => owners.filter(owner => owner.id !== id));
+            this.loadOwners();
             console.log(response.message);
           } else {
             console.error(response.message);
@@ -100,7 +99,7 @@ export class AdminDashboardComponent implements OnInit {
       this.adminService.deleteSitter(id).subscribe({
         next: (response) => {
           if (response.deleted) {
-            this.sitters.update(sitters => sitters.filter(sitter => sitter.id !== id));
+            this.loadSitters();
             console.log(response.message);
           } else {
             console.error(response.message);
@@ -116,7 +115,7 @@ export class AdminDashboardComponent implements OnInit {
       this.adminService.deleteRequest(id).subscribe({
         next: (response) => {
           if (response.deleted) {
-            this.requests.update(requests => requests.filter(request => request.id !== id));
+            this.loadRequests();
             console.log(response.message);
           } else {
             console.error(response.message);

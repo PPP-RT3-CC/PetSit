@@ -38,7 +38,7 @@
   @if (activeTab() === 'owners') {
     <app-admin-table
       [title]="'Owners List'"
-      [count]="ownersCount()"
+      [count]="owners().length"
       [columns]="ownerColumns"
       [data]="owners()"
       (onDelete)="deleteOwner($event)">
@@ -49,7 +49,7 @@
   @if (activeTab() === 'sitters') {
     <app-admin-table
       [title]="'Sitters List'"
-      [count]="sittersCount()"
+      [count]="sitters().length"
       [columns]="sitterColumns"
       [data]="sitters()"
       (onDelete)="deleteSitter($event)">
@@ -60,7 +60,7 @@
   @if (activeTab() === 'requests') {
     <app-admin-table
       [title]="'Requests List'"
-      [count]="requestsCount()"
+      [count]="requests().length"
       [columns]="requestColumns"
       [data]="requests()"
       (onDelete)="deleteRequest($event)">
