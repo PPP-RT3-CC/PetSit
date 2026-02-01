@@ -11,20 +11,25 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
         </li>
+        @if (!isLoggedIn){
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/register']" routerLinkActive="active">Register</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a>
         </li>
-        @if (role === 'owner'){
+      }
+        
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/sitters']" routerLinkActive="active">Sitters</a>
-        </li>}
+        </li>
+        @if (isLoggedIn){
         <li class="nav-item">
           <a class="nav-link"
-   [routerLink]="dashboardLink"
-   routerLinkActive="active">Dashboard</a>
+            [routerLink]="dashboardLink"
+            routerLinkActive="active">Dashboard</a>
         </li>
-
-     
+      }
       </ul>
     </div>
   </div>

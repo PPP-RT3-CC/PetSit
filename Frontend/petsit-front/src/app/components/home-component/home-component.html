@@ -15,27 +15,30 @@
   <!-- Cards Section -->
   <div class="row g-4">
 
+  
     <!-- Owner Card -->
-    <!-- <div class="col-md-6">
+  <div class="col-md-6">
       <div class="card  p-3 h-100">
         <div class="card-body text-center">
           <h5 class="card-title fw-bold">Pet Owner</h5>
           <p class="card-text">Create requests for your pets and find trusted sitters easily.</p>
-          <a routerLink="/owner" class="btn btn-secondary btn-lg me-2">Go to Dashboard</a>
+          @if (role === 'owner'){
+          <a routerLink="/owner" class="btn btn-secondary btn-lg me-2">Go to Dashboard</a>}
         </div>
       </div>
-    </div> -->
+    </div> 
 
     <!-- Sitter Card -->
-    <!-- <div class="col-md-6">
+   <div class="col-md-6">
       <div class="card p-3 h-100">
         <div class="card-body text-center">
           <h5 class="card-title fw-bold">Pet Sitter</h5>
           <p class="card-text">Receive requests, manage bookings, and grow your pet-sitting business.</p>
-          <a routerLink="/sitter" class="btn btn-secondary btn-lg me-2">Go to Dashboard</a>
+          @if (role === 'sitter'){
+          <a routerLink="/sitter" class="btn btn-secondary btn-lg me-2">Go to Dashboard</a>}
         </div>
       </div>
-    </div> -->
+    </div> 
 
     <!-- Meet Some Adorable Pets Carousel -->
     <div class="container py-5">
