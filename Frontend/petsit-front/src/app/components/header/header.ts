@@ -20,22 +20,6 @@ export class Header {
     return !!localStorage.getItem('token'); 
   }
 
-  get dashboardLink(): string {
-    switch (this.role) {
-      case 'owner':
-        return '/owner';
-
-      case 'sitter':
-        return '/sitter';
-
-      case 'admin':
-        return '/admin';
-
-      default:
-        return '/';
-    }
-  }
-
   private authService = inject(Auth);
   private router = inject(Router);
   logout() {

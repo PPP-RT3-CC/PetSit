@@ -37,7 +37,7 @@ export class NewBookingComponent implements OnInit {
     success => console.log('Success!', success),
     error => console.error('Failed!', error)
   );
-      this.router.navigate(['/sitter']);
+      this.router.navigate(['/owner']);
 
       this.requestsService.createRequest(data).subscribe(() => {
 
