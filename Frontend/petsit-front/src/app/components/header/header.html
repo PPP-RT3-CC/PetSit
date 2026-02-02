@@ -28,6 +28,9 @@
           <a class="nav-link"
             [routerLink]="dashboardLink"
             routerLinkActive="active">Dashboard</a>
+        </li> 
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/logout']" routerLinkActive="active" (click)="logout()">Logout</a>
         </li>
       }
       </ul>

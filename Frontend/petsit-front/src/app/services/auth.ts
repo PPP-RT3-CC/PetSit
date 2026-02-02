@@ -30,5 +30,15 @@ export class Auth {
                   }): Observable<any> {
     return this.http.post(`${this.API_URL}/register`, data);
   }
-  
+
+  logout(): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    return this.http.post(`${this.API_URL}/logout`, {}, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+ 
 }

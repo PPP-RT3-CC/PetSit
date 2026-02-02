@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Auth } from '../../services/auth';
 
 
 @Component({
@@ -19,19 +20,30 @@ export class Header {
     return !!localStorage.getItem('token'); 
   }
 
-get dashboardLink(): string {
-  switch (this.role) {
-    case 'owner':
-      return '/owner';
+  get dashboardLink(): string {
+    switch (this.role) {
+      case 'owner':
+        return '/owner';
 
-    case 'sitter':
-      return '/sitter';
+      case 'sitter':
+        return '/sitter';
 
-    case 'admin':
-      return '/admin';
+      case 'admin':
+        return '/admin';
 
-    default:
-      return '/';
+      default:
+        return '/';
+    }
   }
-}
+
+  private authService = inject(Auth);
+  private router = inject(Router);
+  logout() {
+    this.authService.logout().subscribe(() => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('role');
+      this.router.navigate(['/']);
+    });
+  }
+
 }
