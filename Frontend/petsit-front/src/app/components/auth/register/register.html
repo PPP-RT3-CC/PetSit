@@ -55,6 +55,11 @@
                 <small class="text-danger">Email invalide</small>
             }
           </div>
+            @if(errorMessage) {
+            <div  class="alert alert-danger">
+              {{ errorMessage }}
+            </div>
+          }
 
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
@@ -170,6 +175,7 @@
             <a routerLink="/login" class="signup-link ms-1">Log in</a>
           </div>
         </form>
+  
       </div>
     </div>
   </div>

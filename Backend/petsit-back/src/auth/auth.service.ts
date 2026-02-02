@@ -6,7 +6,10 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
-import { UnauthorizedException } from '@nestjs/common/exceptions';
+import {
+  ConflictException,
+  UnauthorizedException,
+} from '@nestjs/common/exceptions';
 import { UserRole } from 'src/Enums/roles.enum';
 import { BlacklistedToken } from './entities/blacklisted-token.entity';
 
@@ -25,6 +28,7 @@ export class AuthService {
     if (dto.role === UserRole.ADMIN) {
       throw new UnauthorizedException('Cannot register as admin');
    }
+   try{
     const hashedPassword = await bcrypt.hash(dto.password, 10);
 
     const user = this.userRepository.create({
@@ -36,6 +40,14 @@ export class AuthService {
     await this.userRepository.save(user);
 
     return { message: 'User registered' };
+   } catch (error) {
+        
+        // if email already exists
+      if (error.code === '23505') {
+          throw new ConflictException('Email already in use');
+      }
+      throw error;
+   }
   }
 
   async login(dto: LoginDto) {

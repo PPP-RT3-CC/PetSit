@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectorRef } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Auth } from '../../../services/auth';
@@ -13,6 +13,7 @@ export class Register {
 
   private authService = inject(Auth);
   private router = inject(Router);
+  private cdr = inject(ChangeDetectorRef);
   errorMessage = '';
 
   role: string = '';
@@ -33,6 +34,7 @@ export class Register {
     },
     error: (err) => {
       this.errorMessage = err.error?.message || 'Erreur inscription';
+      this.cdr.detectChanges();
     },
     complete: () => {
       console.log('Register request completed');
