@@ -9,6 +9,7 @@ import { NewBookingComponent } from './components/bookings/new-booking-component
 import { SitterDashboardComponent } from './components/sitter-dashboard-component/sitter-dashboard-component';
 import { OwnerDashboardComponent } from './components/owner-dashboard-component/owner-dashboard-component';
 import { AdminDashboardComponent } from './components/admin-dashboard-component/admin-dashboard-component';
+import { roleGuard } from './role-guard';
 
 
 export const routes: Routes = [
@@ -18,9 +19,9 @@ export const routes: Routes = [
         {path:'', component: HomeComponent},
         {path:'sitters', component: SittersComponent},
         {path: 'bookings/new', component: NewBookingComponent },
-        {path: 'sitter', component: SitterDashboardComponent},
-        {path:  'owner', component:OwnerDashboardComponent},
-        { path: 'admin', component: AdminDashboardComponent },
+        {path: 'sitter',canActivate: [roleGuard(['sitter'])], component: SitterDashboardComponent},
+        {path: 'owner', canActivate: [roleGuard(['owner'])], component:OwnerDashboardComponent},
+        {path: 'admin',canActivate: [roleGuard(['admin'])], component: AdminDashboardComponent },
 
         ]
     },

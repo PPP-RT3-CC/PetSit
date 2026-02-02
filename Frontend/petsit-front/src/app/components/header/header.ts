@@ -9,7 +9,15 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './header.css',
 })
 export class Header {
-  role = 'owner';
+  role: string | null = null;
+
+  constructor() {
+    this.role = localStorage.getItem('role');
+  }
+
+  get isLoggedIn(): boolean {
+    return !!localStorage.getItem('token'); 
+  }
 
 get dashboardLink(): string {
   switch (this.role) {

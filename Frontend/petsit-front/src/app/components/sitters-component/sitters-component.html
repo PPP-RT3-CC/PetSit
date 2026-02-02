@@ -53,17 +53,17 @@
                 </span>
               </p>
 
-            </div>
-
+            </div> 
             <!-- Action -->
             <div class="col-md-3 d-flex align-items-center">
+               @if (role !== 'sitter' || !isLoggedIn) {
               <button
                 class="btn btn-secondary w-100 py-3"
                 (click)="requestSitting(sitter.id)">
                 Request a Booking
-              </button>
+              </button>}
             </div>
-
+          
           </div>
 
         </div>

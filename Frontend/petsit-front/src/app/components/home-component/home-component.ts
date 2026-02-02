@@ -11,8 +11,14 @@ import { Auth } from '../../services/auth';
   styleUrl: './home-component.css',
 })
 export class HomeComponent {
-  //auth = inject(Auth);
-  isLoggedIn=false;//baad mel authService
+
+  role: string | null = null;
+  isLoggedIn = false;
+
+  ngOnInit() {
+    this.role = localStorage.getItem('role');
+    this.isLoggedIn = !!localStorage.getItem('token'); 
+  }
   pets = [
     { name: 'Besbis', type: 'Cat', image: 'assets/images/cat.jpg' },
     { name: 'Batta', type: 'Duck', image: 'assets/images/duck.jpg' },

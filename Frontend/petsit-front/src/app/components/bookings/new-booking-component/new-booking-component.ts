@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, type NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormsModule, NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RequestsService } from './../../../services/requests-service';
 
 @Component({
@@ -16,6 +16,7 @@ export class NewBookingComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private requestsService: RequestsService
   ) {}
 
@@ -31,11 +32,17 @@ export class NewBookingComponent implements OnInit {
         sitterId: this.sitterId,
         ...bookingForm.value
       };
+       console.log('Testing navigation...');
+  this.router.navigate(['/sitter']).then(
+    success => console.log('Success!', success),
+    error => console.error('Failed!', error)
+  );
+      this.router.navigate(['/sitter']);
 
       this.requestsService.createRequest(data).subscribe(() => {
-        alert('Booking request sent');
-        bookingForm.reset();
+
       });
+
     }
   }
 }

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { tap } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
@@ -9,8 +10,14 @@ export class Auth {
   private http = inject(HttpClient);
   private API_URL = 'http://localhost:3000/auth';
 
-  login(data: { email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.API_URL}/login`, data);
+  login(data: { email: string; password: string }): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(`${this.API_URL}/login`, data).pipe(
+    tap((response: any) => {
+      localStorage.setItem('token', response.token);
+      const payload = JSON.parse(atob(response.token.split('.')[1]));
+      localStorage.setItem('role', payload.role);
+    })
+  );
   }
 
   register(data: { firstname: string; 

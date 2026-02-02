@@ -12,9 +12,12 @@ import { Observable } from 'rxjs';
   templateUrl: './sitters-component.html',
   styleUrl: './sitters-component.css',
 })
-export class SittersComponent  {
+export class SittersComponent implements OnInit {
 
   sitters: Sitter[] = [];
+  role: string | null = null;
+  isLoggedIn = false;
+
 
   constructor(
     private router: Router,
@@ -29,10 +32,21 @@ sitters$: Observable<Sitter[]> = this.sittersService.getSitters();
   //   });
   // }
 
+  ngOnInit() {
+    this.role = localStorage.getItem('role');
+    this.isLoggedIn = !!localStorage.getItem('token'); 
+  }
+
   requestSitting(sitterId: number): void {
+    
+      if (!this.isLoggedIn) {
+        this.router.navigate(['/register']); 
+        return; 
+      }
+      else{
       this.router.navigate(
         ['/bookings/new'],
         { queryParams: { sitterId } }
       );
-    }
+    }}
 }
