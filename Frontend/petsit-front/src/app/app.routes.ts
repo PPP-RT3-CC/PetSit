@@ -10,6 +10,7 @@ import { SitterDashboardComponent } from './components/sitter-dashboard-componen
 import { OwnerDashboardComponent } from './components/owner-dashboard-component/owner-dashboard-component';
 import { AdminDashboardComponent } from './components/admin-dashboard-component/admin-dashboard-component';
 import { roleGuard } from './role-guard';
+import { authGuard } from './guards/auth.guard';
 
 
 export const routes: Routes = [
@@ -17,11 +18,11 @@ export const routes: Routes = [
         component: MainLayout,
         children: [
         {path:'', component: HomeComponent},
-        {path:'sitters', component: SittersComponent},
-        {path: 'bookings/new', component: NewBookingComponent },
-        {path: 'sitter',canActivate: [roleGuard(['sitter'])], component: SitterDashboardComponent},
-        {path: 'owner', canActivate: [roleGuard(['owner'])], component:OwnerDashboardComponent},
-        {path: 'admin',canActivate: [roleGuard(['admin'])], component: AdminDashboardComponent },
+        {path:'sitters',canActivate:[authGuard] , component: SittersComponent},
+        {path: 'bookings/new', canActivate:[authGuard],component: NewBookingComponent },
+        {path: 'sitter', canActivate: [authGuard, roleGuard(['sitter'])], component: SitterDashboardComponent},
+        {path: 'owner', canActivate: [authGuard, roleGuard(['owner'])], component:OwnerDashboardComponent},
+        {path: 'admin', canActivate: [authGuard, roleGuard(['admin'])], component: AdminDashboardComponent },
 
         ]
     },
