@@ -8,12 +8,15 @@ import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { UnauthorizedException } from '@nestjs/common/exceptions';
 import { UserRole } from 'src/Enums/roles.enum';
+import { BlacklistedToken } from './entities/blacklisted-token.entity';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
     private jwtService: JwtService,
+    @InjectRepository(BlacklistedToken)
+    private blacklistRepo: Repository<BlacklistedToken>,
   ) {}
 
   async register(dto: RegisterDto) {
@@ -57,4 +60,8 @@ export class AuthService {
     return { token };
   }
 
+  async blacklistToken(token: string) {
+    await this.blacklistRepo.save({ token });
+    return { message: 'Logged out' };
+  }
 }

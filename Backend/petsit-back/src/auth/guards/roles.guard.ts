@@ -17,9 +17,11 @@ export class RolesGuard implements CanActivate {
 
     if (!requiredRoles) return true;
 
+    // récuperer l utilisateur connecté depuis la requete
     const request = context.switchToHttp().getRequest();
     const user = request.user;
 
+    // si utilisateur inexistant ou son role n'est pas dans les roles requis on bloque l accès
     if (!user || !requiredRoles.includes(user.role)) {
       throw new ForbiddenException('Access denied');
     }

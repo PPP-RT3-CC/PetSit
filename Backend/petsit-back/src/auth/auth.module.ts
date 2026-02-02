@@ -6,11 +6,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/users/entities/user.entity';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './jwt.strategy';
+import { BlacklistedToken } from './entities/blacklisted-token.entity';
 
 @Module({
   imports: [
     //pour utiliser le repository User dans AuthService
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([User, BlacklistedToken]),
 
     PassportModule.register({ defaultStrategy: 'jwt' }),
 
