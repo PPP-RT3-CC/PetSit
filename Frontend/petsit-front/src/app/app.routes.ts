@@ -18,7 +18,7 @@ export const routes: Routes = [
         component: MainLayout,
         children: [
         {path:'', component: HomeComponent},
-        {path:'sitters',canActivate:[authGuard] , component: SittersComponent},
+        {path:'sitters', component: SittersComponent},
         {path: 'bookings/new', canActivate:[authGuard, roleGuard(['owner'])],component: NewBookingComponent },
         {path: 'sitter', canActivate: [authGuard, roleGuard(['sitter'])], component: SitterDashboardComponent},
         {path: 'owner', canActivate: [authGuard, roleGuard(['owner'])], component:OwnerDashboardComponent},
