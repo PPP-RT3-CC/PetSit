@@ -19,7 +19,7 @@ export const routes: Routes = [
         children: [
         {path:'', component: HomeComponent},
         {path:'sitters',canActivate:[authGuard] , component: SittersComponent},
-        {path: 'bookings/new', canActivate:[authGuard, roleGuard(['sitter'])],component: NewBookingComponent },
+        {path: 'bookings/new', canActivate:[authGuard, roleGuard(['owner'])],component: NewBookingComponent },
         {path: 'sitter', canActivate: [authGuard, roleGuard(['sitter'])], component: SitterDashboardComponent},
         {path: 'owner', canActivate: [authGuard, roleGuard(['owner'])], component:OwnerDashboardComponent},
         {path: 'admin', canActivate: [authGuard, roleGuard(['admin'])], component: AdminDashboardComponent },
