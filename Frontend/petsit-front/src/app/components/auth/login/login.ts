@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Auth } from '../../../services/auth';
 import { Router, RouterLink } from '@angular/router';
@@ -13,7 +13,7 @@ export class Login {
 
   private authService = inject(Auth);
   private router = inject(Router);
-
+  private cdr = inject(ChangeDetectorRef);
   errorMessage = '';
   onSubmit(loginForm: NgForm){
     if (loginForm.invalid) return;
@@ -25,6 +25,7 @@ export class Login {
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Erreur de connexion';
+        this.cdr.detectChanges();
       },
       complete: () => {
         console.log('Login request completed');

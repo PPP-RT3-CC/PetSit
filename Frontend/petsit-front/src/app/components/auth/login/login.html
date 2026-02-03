@@ -40,6 +40,11 @@
                 <small class="text-danger">Mot de passe requis (min 6 caractères)</small>
             }
         </div>
+              @if(errorMessage) {
+            <div  class="alert alert-danger">
+              {{ errorMessage }}
+            </div>
+          }
 
         <button type="submit" 
                 class="btn btn-login w-100 btn-lg mb-3"
