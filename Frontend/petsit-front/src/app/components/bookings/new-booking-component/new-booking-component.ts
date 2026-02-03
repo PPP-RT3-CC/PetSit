@@ -32,15 +32,12 @@ export class NewBookingComponent implements OnInit {
         sitterId: this.sitterId,
         ...bookingForm.value
       };
-       console.log('Testing navigation...');
-  this.router.navigate(['/sitter']).then(
-    success => console.log('Success!', success),
-    error => console.error('Failed!', error)
-  );
-      this.router.navigate(['/owner']);
+
+      
 
       this.requestsService.createRequest(data).subscribe(() => {
-
+          this.router.navigate(['/owner']);
+          
       });
 
     }

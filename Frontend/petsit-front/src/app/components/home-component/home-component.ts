@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { interval, map, startWith, type Observable } from 'rxjs';
 import { Auth } from '../../services/auth';
 
@@ -15,10 +15,21 @@ export class HomeComponent {
   role: string | null = null;
   isLoggedIn = false;
 
+  constructor(private router: Router) {} 
+
   ngOnInit() {
+    this.updateAuthStatus();
+    // Écoute les événements de navigation( like when i logout )
+    this.router.events.subscribe(() => {
+      this.updateAuthStatus();
+    }); 
+  }
+
+  updateAuthStatus() {
     this.role = localStorage.getItem('role');
     this.isLoggedIn = !!localStorage.getItem('token'); 
   }
+
   pets = [
     { name: 'Besbis', type: 'Cat', image: 'assets/images/cat.jpg' },
     { name: 'Batta', type: 'Duck', image: 'assets/images/duck.jpg' },
